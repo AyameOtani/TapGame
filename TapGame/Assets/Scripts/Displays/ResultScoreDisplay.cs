@@ -1,0 +1,28 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+/// <summary>
+/// リザルトシーンで最終スコアを表示するクラス
+/// </summary>
+public class ResultScoreDisplay : MonoBehaviour
+{
+    // リザルト画面で表示するテキストの変数
+    [SerializeField] private TextMeshProUGUI resultText;
+
+    private void Start()
+    {
+        // ScoreManagerが存在するか確認し、存在する場合は保持している最終スコアを取得
+        if (ScoreManager.Instance != null)
+        {
+            // スコアを文字列として取得し、結果表示用テキストに反映
+            resultText.text = "Score: " + ScoreManager.Instance.CurrentScore;
+        }
+        else
+        {
+            // ScoreManagerが見つからない場合の安全策
+            resultText.text = "Score: 0";
+        }
+    }
+}
