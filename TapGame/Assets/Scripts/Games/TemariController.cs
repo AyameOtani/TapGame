@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /// <summary>
-/// 手毬の種類を定義する列挙型 数種類の画像を出すため
+/// 手毬の種類を定義する列挙型
 /// </summary>
 public enum TemariType
 {
-    None, // タイプなし
-    Blue, // 青い手毬
-    Pink  // ピンクの手毬
+    None,
+    Blue,
+    Pink
 }
 
 /// <summary>
@@ -18,19 +17,33 @@ public enum TemariType
 /// </summary>
 public class TemariController : MonoBehaviour
 {
-    // Inspectorから手毬の種類を選択出来るようにする
     [SerializeField] private TemariType temariType;
 
-    /// <summary>
-    /// 手毬を消す処理 タップされた時に削除したいため
-    /// </summary>
-    private void OnMouseDown()
+    void Update()
     {
-        // スコアを1加算する
-        ScoreManager.Instance.AddScore(1);
+        // クリック（PC） or タップ（スマホ）
+        if (Input.GetMouseButtonDown(0))
+        {
+            // 画面座標 → ワールド座標に変換
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // タップされた手毬をシーンから削除する
-        Destroy(gameObject);
+            // その位置にあるCollider2Dを取得
+            Collider2D hit = Physics2D.OverlapPoint(worldPos);
+
+            // 自分自身に当たっていたら
+            if (hit != null && hit.gameObject == this.gameObject)
+            {
+                Tapped();
+            }
+        }
     }
 
+    /// <summary>
+    /// タップされたときの処理
+    /// </summary>
+    private void Tapped()
+    {
+        ScoreManager.Instance.AddScore(1);
+        Destroy(gameObject);
+    }
 }
