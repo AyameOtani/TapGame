@@ -10,7 +10,8 @@ public enum TemariType
 {
     None,
     Blue,
-    Pink
+    Pink,
+    Yellow
 }
 
 /// <summary>
@@ -79,10 +80,16 @@ public class TemariController : MonoBehaviour
                 textColor = new Color32(0, 180, 255, 255);
                 break;
 
-            case TemariType .Pink:
+            case TemariType.Pink:
                 textColor = new Color32(255, 0, 200, 255);
                 point = 5;
                 break;
+
+            case TemariType.Yellow:
+                textColor = new Color32(240, 190, 80, 255);
+                point = 10;
+                break;
+
 
             default:
                 point = 2;

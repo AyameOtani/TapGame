@@ -287,7 +287,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 0.8901961, b: 0.92156863, a: 0}
+  m_BackGroundColor: {r: 1, g: 0.95686275, b: 0.95686275, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -358,6 +358,7 @@ MonoBehaviour:
   temariPrefabs:
   - {fileID: 8666681117461395220, guid: 4ad8e905d6a3bf14297d77477b5d88ef, type: 3}
   - {fileID: 525862949974124120, guid: 520d88931d68b4343b69b3beb40d5268, type: 3}
+  - {fileID: 8587688477128580920, guid: 65c51888f47fa6e4995438c79b91d822, type: 3}
   uiPaddingTop: 1.23
   temariRadius: 0.4
   startInterval: 0.2
