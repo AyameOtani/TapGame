@@ -362,7 +362,7 @@ MonoBehaviour:
   temariRadius: 0.4
   startInterval: 0.2
   initialSpawnInterval: 0.7
-  minSpawninterval: 0.15
+  minSpawninterval: 0.25
 --- !u!1 &823836046
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,10 +496,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Score
+  m_text: "\u30B9\u30B3\u30A2"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8bca17797477aec42a6c6b3f6b63c141, type: 2}
-  m_sharedMaterial: {fileID: 5375291758087008050, guid: 8bca17797477aec42a6c6b3f6b63c141, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5bcfaf6006546dd4fa5f161073dfbff5, type: 2}
+  m_sharedMaterial: {fileID: -1233269667324646783, guid: 5bcfaf6006546dd4fa5f161073dfbff5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -748,10 +748,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Timer
+  m_text: "\u6B8B\u308A"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8bca17797477aec42a6c6b3f6b63c141, type: 2}
-  m_sharedMaterial: {fileID: 5375291758087008050, guid: 8bca17797477aec42a6c6b3f6b63c141, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5bcfaf6006546dd4fa5f161073dfbff5, type: 2}
+  m_sharedMaterial: {fileID: -1233269667324646783, guid: 5bcfaf6006546dd4fa5f161073dfbff5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 823836048}
   remainingTime: 30
-  maxFadeTime: 1.5
+  maxFadeTime: 1
   timerText: {fileID: 1928111382}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

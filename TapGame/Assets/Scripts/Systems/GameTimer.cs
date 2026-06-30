@@ -24,6 +24,9 @@ public class GameTimer : MonoBehaviour
     public static float RemainingTime { get; private set; }
     public static float TotalTime { get; private set; } = 30.0f;
 
+    // 元のテキストを保存する変数 インスペクターで変更したいため
+    private string baseText;
+
     /// <summary>
     /// タイマーを初期化するための処理
     /// </summary>
@@ -38,6 +41,8 @@ public class GameTimer : MonoBehaviour
     private void Start()
     {
         RemainingTime = remainingTime;
+
+        baseText = timerText.text;
     }
 
     private void Update()
@@ -53,7 +58,7 @@ public class GameTimer : MonoBehaviour
 
             // 残り時間を整数にして表示する
             int displayerTime = Mathf.CeilToInt(remainingTime);
-            timerText.text = "Time: " + displayerTime;
+            timerText.text = baseText + displayerTime + "秒";
         }
         else
         {

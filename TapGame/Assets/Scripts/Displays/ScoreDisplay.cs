@@ -11,13 +11,24 @@ public class ScoreDisplay : MonoBehaviour
 {
     // インスペクターから設定する表示用テキスト
     [SerializeField] private TextMeshProUGUI scoreText;
+    
+    // インスペクターのスコアという文字を保存する変数
+    private string scoreNome;
+
+
+
+    private void Start()
+    {
+        scoreNome = scoreText.text;
+    }
+
 
     private void Update()
     {
         // ScoreManagerから現在のスコアを取得して表示を更新
         if (ScoreManager.Instance != null)
         {
-            scoreText.text = "Score: " + ScoreManager.Instance.CurrentScore;
+            scoreText.text = scoreNome + " " +ScoreManager.Instance.CurrentScore;
         }
         else
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -26,8 +27,9 @@ public class TemariController : MonoBehaviour
     // スコア演出用の文字 (+1とか加算されたものを出すため)
     [SerializeField] private GameObject scorePopUpPrefab;
 
+
     // 拡大の目標値
-    private Vector3 targetScale;
+    private Vector2 targetScale;
 
     private void Start()
     {
@@ -69,18 +71,22 @@ public class TemariController : MonoBehaviour
 
         // タイプによって点数を変える処理
         int point = 0;
+        Color32 textColor;
         switch (temariType)
         {
             case TemariType.Blue:
                 point = 2;
+                textColor = new Color32(0, 180, 255, 255);
                 break;
 
             case TemariType .Pink:
+                textColor = new Color32(255, 0, 200, 255);
                 point = 5;
                 break;
 
             default:
                 point = 2;
+                textColor = new Color32(0, 180, 255, 255);
                 break;
         }
 
@@ -97,8 +103,11 @@ public class TemariController : MonoBehaviour
             Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
             popUp.transform.position = screenPos;
 
-            // テキストを更新
-            popUp.GetComponent<TMPro.TextMeshProUGUI>().text = "+" + point;
+            // テキストを取得
+            var temp = popUp.GetComponent<TMPro.TextMeshProUGUI>();
+            temp.text = "+" + point;
+            temp.color = textColor;
+
         }
 
         Destroy(gameObject);
@@ -110,27 +119,27 @@ public class TemariController : MonoBehaviour
     /// </summary>
     private IEnumerator ScaleUpRoutine()
     {
-        transform.localScale = Vector3.zero;
+        transform.localScale = Vector2.zero;
 
         // 拡大にかける時間
         float duration = scaleDuration;
-        float elapsed = 0f;
+        float elapsed = 0.0f;
 
         while (elapsed < duration)
         {
             // 経過時間を加算
             elapsed += Time.deltaTime;
 
-            // 0〜1の割合を計算
+            // 0から1の割合を計算
             float t = Mathf.Clamp01(elapsed / duration);
 
-            // 0から目標サイズまで割合に応じて補間する
-            transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, t);
+            // 目標サイズまで割合に応じて補間する
+            transform.localScale = Vector2.Lerp(Vector2.zero, targetScale, t);
 
             yield return null;
         }
 
-        // 最後に確実に目標サイズにする
+        // 目標サイズにする
         transform.localScale = targetScale;
     }
 
