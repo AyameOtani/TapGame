@@ -25,4 +25,5 @@ public class ResultScoreDisplay : MonoBehaviour
             resultText.text = "Score: 0";
         }
     }
+
 }
