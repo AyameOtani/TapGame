@@ -58,7 +58,7 @@ public class GameTimer : MonoBehaviour
 
             // 残り時間を整数にして表示する
             int displayerTime = Mathf.CeilToInt(remainingTime);
-            timerText.text = baseText + displayerTime + "秒";
+            timerText.text = baseText + " " +displayerTime + "秒";
         }
         else
         {
