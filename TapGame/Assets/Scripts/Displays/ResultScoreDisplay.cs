@@ -22,12 +22,12 @@ public class ResultScoreDisplay : MonoBehaviour
         if (ScoreManager.Instance != null)
         {
             // スコアを文字列として取得し、結果表示用テキストに反映
-            resultText.text = resultScoreText + " " + ScoreManager.Instance.CurrentScore;
+            resultText.text = resultScoreText + "  " + ScoreManager.Instance.CurrentScore;
         }
         else
         {
             // ScoreManagerが見つからない場合の安全策
-            resultText.text = resultScoreText + " " + 0;
+            resultText.text = resultScoreText + "  " + 0;
         }
     }
 

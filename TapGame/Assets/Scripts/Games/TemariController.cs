@@ -80,16 +80,16 @@ public class TemariController : MonoBehaviour
         {
             case TemariType.Blue:
                 point = 2;
-                textColor = new Color32(0, 180, 255, 255);
+                textColor = new Color32(80, 120, 200, 255);
                 break;
 
             case TemariType.Pink:
-                textColor = new Color32(255, 0, 200, 255);
+                textColor = new Color32(200, 80, 180, 255);
                 point = 5;
                 break;
 
             case TemariType.Yellow:
-                textColor = new Color32(240, 190, 80, 255);
+                textColor = new Color32(210, 190, 80, 255);
                 point = 10;
                 break;
 

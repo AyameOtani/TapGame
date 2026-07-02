@@ -28,7 +28,7 @@ public class ScoreDisplay : MonoBehaviour
         // ScoreManagerから現在のスコアを取得して表示を更新
         if (ScoreManager.Instance != null)
         {
-            scoreText.text = scoreNome + " " +ScoreManager.Instance.CurrentScore;
+            scoreText.text = scoreNome + "  " +ScoreManager.Instance.CurrentScore;
         }
         else
         {
