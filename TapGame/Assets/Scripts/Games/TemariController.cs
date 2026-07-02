@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 /// <summary>
 /// 手毬の種類を定義する列挙型
@@ -27,6 +28,8 @@ public class TemariController : MonoBehaviour
 
     // スコア演出用の文字 (+1とか加算されたものを出すため)
     [SerializeField] private GameObject scorePopUpPrefab;
+
+    [SerializeField] private GameObject fxTemariDestroy;
 
 
     // 拡大の目標値
@@ -117,7 +120,19 @@ public class TemariController : MonoBehaviour
 
         }
 
+        // パーティクルが設定されていたら生成する
+        if (fxTemariDestroy != null)
+        {
+            GameObject particle = Instantiate(fxTemariDestroy, transform.position, Quaternion.identity);
+
+            // 消された手毬と色を統一させる
+            // 一体感を出すため
+            var main = particle.GetComponent<ParticleSystem>().main;
+            main.startColor = new ParticleSystem.MinMaxGradient(textColor);
+        }
+
         Destroy(gameObject);
+
     }
 
 
