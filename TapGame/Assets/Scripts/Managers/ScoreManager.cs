@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// スコアの保持と管理を行うクラス シーンを跨いでもスコアを保存したいから

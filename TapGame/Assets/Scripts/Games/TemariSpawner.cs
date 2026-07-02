@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 /// <summary>
 /// 手毬をランダムに生成するクラス
@@ -10,21 +8,35 @@ public class TemariSpawner : MonoBehaviour
     // 生成する手毬のprefabを格納するリスト
     [SerializeField] private GameObject[] temariPrefabs;
 
-    // 画面上部のUIとかぶらないように余白を作るための数値
-    [SerializeField] private float uiPaddingTop = 2.0f;
-
     // 手毬の大きさ 画面の中に手毬が表示されるようにするため
     [SerializeField] private float temariRadius = 0.5f;
 
     // 最初に生成されるまでの時間 あとから調整可能なように
     [SerializeField] private float startInterval = 1.0f;
 
+    // 画面の比率が変わってもboardを基準に余白をつくるため
+    [SerializeField] private RectTransform boardRect;
 
     // ゲーム開始時の生成感覚
     [SerializeField] private float initialSpawnInterval = 1.5f;
 
     // ゲーム終了時の生成感覚
     [SerializeField] private float minSpawninterval = 0.2f;
+
+  
+    // 他のクラスからCanvasを取得するための窓口
+    public static TemariSpawner Instance { get; private set; }
+    // UIの親となるCanvasを指定
+    [SerializeField] private Transform canvasTransform;
+
+    /// <summary>
+    /// キャンパスの大きさを外部から取得するための処理
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetCanvasTransform()
+    {
+        return canvasTransform;
+    }
 
 
     // 生成タイミングを制御するための残り時間
@@ -38,6 +50,11 @@ public class TemariSpawner : MonoBehaviour
         timer = startInterval;
     }
 
+    void Awake()
+    {
+        // 自分のインスタンスを保存
+        Instance = this;
+    }
 
     /// <summary>
     /// 毎フレーム更新してタイマーが0になるごとに手毬を生成する
@@ -75,13 +92,15 @@ public class TemariSpawner : MonoBehaviour
         float aspect = (float)Screen.width / Screen.height;
         float halfWidth = orthoSize * aspect;
 
+         // Boardの下端を計算する関数
+        float boardBottom = GetBoardBottomWorldY();
+
         // 手毬が画面外にはみ出したり、UIに重なったりしないように
         // 指定された半径（temariRadius）とUI分の隙間（uiPaddingTop）を考慮して範囲を絞り込む
-
         float minX = -halfWidth + temariRadius;
         float maxX = halfWidth - temariRadius;
         float minY = -orthoSize + temariRadius;
-        float maxY = orthoSize - uiPaddingTop - temariRadius;
+        float maxY = boardBottom - temariRadius;
 
         // ランダムな位置に手毬を生成
         float randomX = Random.Range(minX, maxX);
@@ -106,12 +125,15 @@ public class TemariSpawner : MonoBehaviour
         float orthoSize = Camera.main.orthographicSize;
         float halfWidth = orthoSize * Camera.main.aspect;
 
+        // Boardの下端を計算する関数
+        float boardBottom = GetBoardBottomWorldY();
+
         // 手毬が画面の端で切れたりUIと重なったりしないよう
         // インスペクターで設定した半径と余白を考慮して境界線を計算
         float minX = -halfWidth + temariRadius;
         float maxX = halfWidth - temariRadius;
         float minY = -orthoSize + temariRadius;
-        float maxY = orthoSize - uiPaddingTop - temariRadius;
+        float maxY = boardBottom - temariRadius;
 
         // シーンビュー上で手毬の出現位置を直感的に確認できるよう緑の枠線を描画
         Gizmos.color = Color.green;
@@ -122,6 +144,24 @@ public class TemariSpawner : MonoBehaviour
     }
 
 
-   
+    /// <summary>
+    /// boardよりも下に手毬を表示させるための関数
+    /// </summary>
+    /// <returns></returns>
+    private float GetBoardBottomWorldY()
+    {
+        if (boardRect == null) return Camera.main.orthographicSize;
+
+        // Boardの下端のスクリーン 座標を計算
+        // Pivotが(0.5, 0.5)ならY座標から高さの半分を引く
+        Vector3 bottomPosition = boardRect.position;
+        bottomPosition.y -= (boardRect.rect.height * boardRect.lossyScale.y / 2f);
+
+        // スクリーン座標をワールド座標に変換
+        // Z軸にカメラとの距離を考慮する必要があるため、カメラのNearClipPlaneなどを利用
+        Vector3 worldBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, bottomPosition.y, -Camera.main.transform.position.z));
+
+        return worldBottom.y;
+    }
 }
 

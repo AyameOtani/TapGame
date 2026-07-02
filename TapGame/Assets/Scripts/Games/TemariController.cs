@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 /// <summary>
 /// 手毬の種類を定義する列挙型
@@ -42,27 +39,11 @@ public class TemariController : MonoBehaviour
         StartCoroutine(ScaleUpRoutine());
     }
 
-    void Update()
-    {
-        // 入力があった場合、タップ位置と自身の当たり判定が重なっているかの判定
-        if (Input.GetMouseButtonDown(0))
-        {
-            // 画面座標からワールド座標に変換
-            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D hit = Physics2D.OverlapPoint(worldPos);
-
-            // 自分自身に当たっていたら
-            if (hit != null && hit.gameObject == this.gameObject)
-            {
-                Tapped();
-            }
-        }
-    }
 
     /// <summary>
     /// タップされたときの処理
     /// </summary>
-    private void Tapped()
+    public void Tapped()
     {
         // 時間切れでフェード中の時はタップ判定させないため
         if (GameTimer.IsFading) return;
@@ -105,9 +86,10 @@ public class TemariController : MonoBehaviour
 
         if (scorePopUpPrefab != null)
         {
-            // Canvasを検索して親にする
-            GameObject canvas = GameObject.Find("Canvas");
-            GameObject popUp = Instantiate(scorePopUpPrefab, canvas.transform);
+            // Spawnerからキャンパスを聞く
+            // UI用の座標に変換するため
+            Transform canvasTrans = TemariSpawner.Instance.GetCanvasTransform();
+            GameObject popUp = Instantiate(scorePopUpPrefab, canvasTrans);
 
             // ワールド座標を手毬の位置からUI座標に変換する
             Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
