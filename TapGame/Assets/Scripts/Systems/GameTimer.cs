@@ -49,23 +49,33 @@ public class GameTimer : MonoBehaviour
         // もしtimerTextが設定されていない場合は、エラーを防ぐために処理をスキップする
         if (timerText == null) return;
 
-        // 時間を減らしていく
-        if (remainingTime > 0)
+        // カウントダウン中かどうかを判定
+        bool isCountingDown = CountdownManager.Instance != null && CountdownManager.Instance.IsCountingDown;
+        if (isCountingDown)
         {
-            remainingTime -= Time.deltaTime;
-            RemainingTime = remainingTime;
-
-            // 残り時間を整数にして表示する
-            int displayerTime = Mathf.CeilToInt(remainingTime);
-            timerText.text = baseText + "  " +displayerTime + "秒";
+            timerText.text = baseText + "  30秒";
         }
         else
         {
-            if (!IsFading)
+            // 時間を減らしていく
+            if (remainingTime > 0)
             {
-                StartCoroutine(FadeAndLoad());
+                remainingTime -= Time.deltaTime;
+                RemainingTime = remainingTime;
+
+                // 残り時間を整数にして表示する
+                int displayerTime = Mathf.CeilToInt(remainingTime);
+                timerText.text = baseText + "  " + displayerTime + "秒";
+            }
+            else
+            {
+                if (!IsFading)
+                {
+                    StartCoroutine(FadeAndLoad());
+                }
             }
         }
+      
     }
 
     /// <summary>

@@ -23,7 +23,9 @@ public class TemariSpawner : MonoBehaviour
     // ゲーム終了時の生成感覚
     [SerializeField] private float minSpawninterval = 0.2f;
 
-  
+
+
+
     // 他のクラスからCanvasを取得するための窓口
     public static TemariSpawner Instance { get; private set; }
     // UIの親となるCanvasを指定
@@ -61,6 +63,11 @@ public class TemariSpawner : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (CountdownManager.Instance != null && CountdownManager.Instance.IsCountingDown)
+        {
+            return;
+        }
+
         // フェード中はゲーム進行を止めるため生成処理も無効化
         if (GameTimer.IsFading) return;
 
@@ -108,7 +115,12 @@ public class TemariSpawner : MonoBehaviour
 
         // 複数の手毬タイプからランダムに選び決定した位置に生成（Instantiate）を実行
         int index = Random.Range(0, temariPrefabs.Length);
-        Instantiate(temariPrefabs[index], new Vector3(randomX, randomY, 0), Quaternion.identity);
+
+        // 回転,位置,タイプをランダムで生成している
+        float randomAngle = Random.Range(0.0f, 360.0f);
+        Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
+        Instantiate(temariPrefabs[index], new Vector3(randomX, randomY, 0), randomRotation);
+
     }
 
 
