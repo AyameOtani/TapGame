@@ -23,7 +23,8 @@ public class TemariSpawner : MonoBehaviour
     // ゲーム終了時の生成感覚
     [SerializeField] private float minSpawninterval = 0.2f;
 
-
+    // 新しく生成される手毬を現在の手毬よりも手前に表示させるための描画順序管理用カウンタ
+    private static int currentSortingOrder = 0;
 
 
     // 他のクラスからCanvasを取得するための窓口
@@ -116,11 +117,25 @@ public class TemariSpawner : MonoBehaviour
         // 複数の手毬タイプからランダムに選び決定した位置に生成（Instantiate）を実行
         int index = Random.Range(0, temariPrefabs.Length);
 
+        //// 回転,位置,タイプをランダムで生成している
+        //float randomAngle = Random.Range(0.0f, 360.0f);
+        //Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
+        //Instantiate(temariPrefabs[index], new Vector3(randomX, randomY, 0), randomRotation);
+
+
         // 回転,位置,タイプをランダムで生成している
         float randomAngle = Random.Range(0.0f, 360.0f);
         Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
-        Instantiate(temariPrefabs[index], new Vector3(randomX, randomY, 0), randomRotation);
 
+        // 手毬を生成
+        GameObject obj = Instantiate(temariPrefabs[index],
+            new Vector3(randomX, randomY, 0),randomRotation);
+
+        // 後から生成した手毬ほど手前に表示する
+        if (obj.TryGetComponent<SpriteRenderer>(out var sr))
+        {
+            sr.sortingOrder = currentSortingOrder++;
+        }
     }
 
 
