@@ -834,7 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a85b0f6272b6744937ef4ce90ed718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 2
   amplitude: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
