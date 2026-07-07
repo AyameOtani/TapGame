@@ -87,8 +87,12 @@ public class GameTimer : MonoBehaviour
     {
         IsFading = true;
 
-        // フェードの関数を呼び出してフェードさせる
-        yield return StartCoroutine(fadeController.FadeIn(maxFadeTime));
+        // フェードの関数を呼び出してフェードインさせる
+        yield return StartCoroutine(fadeController.FadeIn(
+            FadeController.FadeType.FadeInType, maxFadeTime)
+            );
+
+
 
         SceneManager.LoadScene("Result");
     }

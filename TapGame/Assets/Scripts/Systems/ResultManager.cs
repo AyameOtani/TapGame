@@ -53,7 +53,10 @@ public class ResultManager : MonoBehaviour
     {
         IsFading = true;
 
-        yield return StartCoroutine(fadeController.FadeIn(maxFadeTime));
+        // フェードインさせる
+        yield return StartCoroutine(fadeController.FadeIn(
+            FadeController.FadeType.FadeInType, maxFadeTime)
+            );
 
         // リザルト画面からタイトル画面へ遷移させるため
         SceneManager.LoadScene("Title");

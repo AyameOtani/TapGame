@@ -20,7 +20,17 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        IsFading = true;
+        StartCoroutine(SetupTitle());
+    }
+
+    private IEnumerator SetupTitle()
+    {
+        // フェードアウト処理
+        yield return StartCoroutine(fadeController.FadeIn(FadeController.FadeType.FadeOutType, maxFadeTime));
+
+        // フェードが終わったら操作可能にする
+        IsFading = false;
     }
 
     // Update is called once per frame
@@ -55,7 +65,10 @@ public class TitleManager : MonoBehaviour
     {
         IsFading = true;
 
-        yield return StartCoroutine(fadeController.FadeIn(maxFadeTime));
+        // フェードインさせる
+        yield return StartCoroutine(fadeController.FadeIn(
+            FadeController.FadeType.FadeInType, maxFadeTime)
+            );
 
         // タイトル画面からゲーム画面へ遷移する
         SceneManager.LoadScene("Game");
