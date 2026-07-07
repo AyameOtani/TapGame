@@ -28,6 +28,9 @@ public class TemariController : MonoBehaviour
 
     [SerializeField] private GameObject fxTemariDestroy;
 
+
+
+
     // 各色ごとのポイントの定数の設定
     private const int BluePoint = 2;
     private const int PinkPoint = 5;
@@ -36,7 +39,7 @@ public class TemariController : MonoBehaviour
     // 加算ポイントの文字色の定義
     private static readonly Color32 BlueColor = new Color32(132, 200, 237, 255);
     private static readonly Color32 PinkColor = new Color32(247, 150, 230, 255);
-    private static readonly Color32 YellowColor = new Color32(248, 245, 140, 255);
+    private static readonly Color32 YellowColor = new Color32(246, 200, 100, 255);
 
 
 

@@ -8,14 +8,14 @@ using UnityEngine.SceneManagement; // シーン遷移に必須
 /// </summary>
 public class GameTimer : MonoBehaviour
 {
-    // パネルを追加出来るようにする
-    [SerializeField] private UnityEngine.UI.Image fadePanel;
-
     // 制限時間を変えられるようにするため　今のところは変えない
     [SerializeField] private float remainingTime = 30.0f;
 
     // フェードにかける時間
-    [SerializeField] private float maxFadeTime = 1.5f;
+    [SerializeField] private float maxFadeTime = 0.8f;
+
+    // フェードするため
+    [SerializeField] private FadeController fadeController; // インスペクターで設定
 
 
     // フェード中かを判定するフラグ
@@ -87,21 +87,8 @@ public class GameTimer : MonoBehaviour
     {
         IsFading = true;
 
-        // 経過した時間
-        float elapsed = 0.0f;
-
-        while (elapsed < maxFadeTime)
-        {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Clamp01(elapsed / maxFadeTime);
-
-            // 透過度を更新
-            Color color = fadePanel.color;
-            color.a = alpha;
-            fadePanel.color = color;
-
-            yield return null;
-        }
+        // フェードの関数を呼び出してフェードさせる
+        yield return StartCoroutine(fadeController.FadeIn(maxFadeTime));
 
         SceneManager.LoadScene("Result");
     }
