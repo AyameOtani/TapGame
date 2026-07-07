@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCount: 3
   fusumaController: {fileID: 1820917167}
+  waitBeforeOpen: 1
 --- !u!1 &580855820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,7 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFusuma: {fileID: 756679825}
   rightFusuma: {fileID: 714162482}
-  duration: 1
+  duration: 0.9
 --- !u!4 &1820917168
 Transform:
   m_ObjectHideFlags: 0

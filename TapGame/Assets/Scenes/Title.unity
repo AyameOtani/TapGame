@@ -962,7 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFusuma: {fileID: 1406265181}
   rightFusuma: {fileID: 228927172}
-  duration: 1
+  duration: 0.8
 --- !u!4 &1851420378
 Transform:
   m_ObjectHideFlags: 0
