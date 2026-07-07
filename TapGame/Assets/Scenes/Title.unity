@@ -440,10 +440,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1660925819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2500, y: 2500}
+  m_SizeDelta: {x: 1080, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1304163386
 GameObject:
@@ -802,6 +802,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fusumaController: {fileID: 1851420377}
+  fadeController: {fileID: 710221462}
+  maxFadeTime: 0.2
 --- !u!95 &1586416601
 Animator:
   serializedVersion: 5
@@ -960,7 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFusuma: {fileID: 1406265181}
   rightFusuma: {fileID: 228927172}
-  duration: 0.5
+  duration: 1
 --- !u!4 &1851420378
 Transform:
   m_ObjectHideFlags: 0
@@ -1124,7 +1126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  amplitude: 30
+  amplitude: 50
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

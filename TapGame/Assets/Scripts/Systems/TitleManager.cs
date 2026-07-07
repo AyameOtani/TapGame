@@ -10,14 +10,36 @@ public class TitleManager : MonoBehaviour
     // ふすまの演出を制御するため
     [SerializeField] private FusumaController fusumaController;
 
+    // ResultからTitleへフェードアウトするため
+    [SerializeField] private FadeController fadeController; // インスペクターで設定
+
+    // フェードにかける時間
+    [SerializeField] private float maxFadeTime = 1.0f;
+
+    //フェード中かどうかの判定
+    private bool IsFading = false;
+
     // ふすま演出中かどうかの判定
     private bool IsAnimating = false;
 
     void Start()
     {
-        // 画面が開いた状態からスタートする想定ならここを調整
+        // フェードアウトをON, アニメーションはOFF
+        IsFading = true;
         IsAnimating = false;
+        StartCoroutine(SetupTitle());
     }
+
+
+    // フェードアウト処理
+    private IEnumerator SetupTitle()
+    {
+        // フェードアウト処理
+        yield return StartCoroutine(fadeController.FadeIn(FadeController.FadeType.FadeOutType, maxFadeTime));
+        // フェードが終わったら操作可能にする
+        IsFading = false;
+    }
+
 
     /// <summary>
     /// ゲーム開始ボタンが押された時の処理
@@ -25,7 +47,7 @@ public class TitleManager : MonoBehaviour
     public void OnTapStartButton()
     {
         // 演出中なら重複操作を防ぐ
-        if (IsAnimating) return;
+        if (IsFading || IsAnimating) return;
 
         // スコアをリセットし、ゲームの初期状態を確保する
         if (ScoreManager.Instance != null)

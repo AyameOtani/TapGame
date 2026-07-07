@@ -43,15 +43,15 @@ public class FusumaController : MonoBehaviour
         IsAnimating = true;
         float elapsed = 0.0f;
 
-        // 左のふすま：閉まっている時（X=0）、開いている時（X=-ふすまの幅）
+        // 左のふすま   閉まっている時（X=0） 開いている時（X=-ふすまの幅）
         float leftClosedX = 0;
         float leftOpenX = -leftFusuma.rect.width;
 
-        // 右のふすま：閉まっている時（X=0）、開いている時（X=ふすまの幅）
+        // 右のふすま   閉まっている時（X=0）  開いている時（X=ふすまの幅）
         float rightClosedX = 0;
         float rightOpenX = rightFusuma.rect.width;
 
-        // isOpenなら(閉 -> 開)、isOpenがfalseなら(開→閉)
+        // isOpenなら開ける    isOpenがfalseなら閉じる
         Vector2 startLeft = isOpen ? new Vector2(leftClosedX, 0) : new Vector2(leftOpenX, 0);
         Vector2 endLeft = isOpen ? new Vector2(leftOpenX, 0) : new Vector2(leftClosedX, 0);
 
@@ -68,6 +68,7 @@ public class FusumaController : MonoBehaviour
 
             yield return null;
         }
+
         IsAnimating = false;
     }
 }

@@ -13,12 +13,14 @@ public class CountdownManager : MonoBehaviour
     // 初期カウントの最大数
     [SerializeField] private int startCount = 3;
 
-    // テキストUIを入れるための定義
-    [SerializeField] private TextMeshProUGUI countdownText;
-
     // ふすまを制御するスクリプトへの参照
     [SerializeField] private FusumaController fusumaController;
 
+    [Header("ふすまが開くまでの待ち時間")]
+    // ふすまが開くまでに待つカウント すぐ開かないように制御
+    [SerializeField] private float waitBeforeOpen = 2.0f;
+
+    private TextMeshProUGUI countdownText;
 
     // 外部から状態を取得するため
     public bool IsCountingDown { get; private set; } = true;
@@ -28,6 +30,10 @@ public class CountdownManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        // 自分自身にアタッチされているコンポーネントを自動取得
+        countdownText = GetComponent<TextMeshProUGUI>();
+        // テキストを始めは隠す
+        countdownText.enabled = false;
     }
 
     private void Start()
@@ -37,6 +43,9 @@ public class CountdownManager : MonoBehaviour
 
     private IEnumerator StartGameRoutine()
     {
+        yield return new WaitForSeconds(waitBeforeOpen);
+
+
         // ふすまを開く処理を開始
         if (fusumaController != null)
         {
@@ -48,7 +57,6 @@ public class CountdownManager : MonoBehaviour
                 yield return null;
             }
         }
-
         // ふすまが開ききったらカウントダウンを開始
         yield return StartCoroutine(CountdownRoutine());
     }
@@ -58,6 +66,8 @@ public class CountdownManager : MonoBehaviour
     /// </summary>
     private IEnumerator CountdownRoutine()
     {
+        // 表示をONにする
+        countdownText.enabled = true;
         int count = startCount;
 
         while (count > 0)
