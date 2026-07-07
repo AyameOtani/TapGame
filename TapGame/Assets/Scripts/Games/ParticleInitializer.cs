@@ -6,9 +6,6 @@
 public class ParticleInitializer : MonoBehaviour
 {
 
-    [SerializeField] private float minSize = 0.1f;
-    [SerializeField] private float maxSize = 0.35f;
-
     /// <summary>
     /// エフェクトを初期化するための処理
     /// </summary>
@@ -20,11 +17,5 @@ public class ParticleInitializer : MonoBehaviour
 
         // 色の設定
         main.startColor = new ParticleSystem.MinMaxGradient(color);
-
-        // サイズのランダム設定
-        main.startSize = new ParticleSystem.MinMaxCurve(minSize, maxSize);
-
-        // 角度のランダム設定
-        main.startRotation = new ParticleSystem.MinMaxCurve(0.0f, 2 * Mathf.PI);
     }
 }
