@@ -117,12 +117,6 @@ public class TemariSpawner : MonoBehaviour
         // 複数の手毬タイプからランダムに選び決定した位置に生成（Instantiate）を実行
         int index = Random.Range(0, temariPrefabs.Length);
 
-        //// 回転,位置,タイプをランダムで生成している
-        //float randomAngle = Random.Range(0.0f, 360.0f);
-        //Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
-        //Instantiate(temariPrefabs[index], new Vector3(randomX, randomY, 0), randomRotation);
-
-
         // 回転,位置,タイプをランダムで生成している
         float randomAngle = Random.Range(0.0f, 360.0f);
         Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);

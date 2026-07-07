@@ -2,6 +2,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// ゲームシーンに遷移させるためのクラス
+/// </summary>
 public class TitleManager : MonoBehaviour
 {
     // フェードするため
