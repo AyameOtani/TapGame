@@ -34,9 +34,9 @@ public class TemariController : MonoBehaviour
     private const int YellowPoint = 10;
 
     // 加算ポイントの文字色の定義
-    private static readonly Color32 BlueColor = new Color32(80, 120, 200, 255);
-    private static readonly Color32 PinkColor = new Color32(200, 80, 180, 255);
-    private static readonly Color32 YellowColor = new Color32(210, 190, 80, 255);
+    private static readonly Color32 BlueColor = new Color32(132, 200, 237, 255);
+    private static readonly Color32 PinkColor = new Color32(247, 150, 230, 255);
+    private static readonly Color32 YellowColor = new Color32(248, 245, 140, 255);
 
 
 
@@ -113,15 +113,16 @@ public class TemariController : MonoBehaviour
 
         }
 
-        // パーティクルが設定されていたら生成する
+        // パーティクルが設定されていたら生成して初期化する
         if (fxTemariDestroy != null)
         {
             GameObject particle = Instantiate(fxTemariDestroy, transform.position, Quaternion.identity);
 
-            // 消された手毬と色を統一させる
-            // 一体感を出すため
-            var main = particle.GetComponent<ParticleSystem>().main;
-            main.startColor = new ParticleSystem.MinMaxGradient(textColor);
+            // アタッチしたスクリプトを取得してパーティクルのセットアップを依頼する
+            if (particle.TryGetComponent<ParticleInitializer>(out var initializer))
+            {
+                initializer.Initialize(textColor);
+            }
         }
 
         Destroy(gameObject);
