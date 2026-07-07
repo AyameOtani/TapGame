@@ -2,77 +2,58 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 /// <summary>
-/// ゲームシーンに遷移させるためのクラス
+/// タイトル画面の制御とゲームシーンへの遷移を管理するクラス
 /// </summary>
 public class TitleManager : MonoBehaviour
 {
-    // フェードするため
-    [SerializeField] private FadeController fadeController; // インスペクターで設定
+    // ふすまの演出を制御するため
+    [SerializeField] private FusumaController fusumaController;
 
-    // フェードにかける時間
-    [SerializeField] private float maxFadeTime = 1.0f;
+    // ふすま演出中かどうかの判定
+    private bool IsAnimating = false;
 
-    //フェード中かどうかの判定
-    private bool IsFading = false;
-
-    // Start is called before the first frame update
     void Start()
     {
-        IsFading = true;
-        StartCoroutine(SetupTitle());
-    }
-
-    private IEnumerator SetupTitle()
-    {
-        // フェードアウト処理
-        yield return StartCoroutine(fadeController.FadeIn(FadeController.FadeType.FadeOutType, maxFadeTime));
-
-        // フェードが終わったら操作可能にする
-        IsFading = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        // 画面が開いた状態からスタートする想定ならここを調整
+        IsAnimating = false;
     }
 
     /// <summary>
-    ///  ゲーム開始ボタンが押された時の処理
+    /// ゲーム開始ボタンが押された時の処理
     /// </summary>
     public void OnTapStartButton()
     {
-        if (IsFading) return;
+        // 演出中なら重複操作を防ぐ
+        if (IsAnimating) return;
 
-        // スコアをリセット 累計にしないため
+        // スコアをリセットし、ゲームの初期状態を確保する
         if (ScoreManager.Instance != null)
         {
-            // リセットする関数を呼ぶ
             ScoreManager.Instance.ResetScore();
         }
 
-        StartCoroutine(StartGameWithFade());
+        // ふすまを閉じてからシーン遷移を開始する
+        StartCoroutine(StartGameWithFusuma());
     }
 
-
     /// <summary>
-    /// ボタンが押されたらフェードさせるため
+    /// ふすまを閉じる演出を行い、完了後にシーンを遷移させる
     /// </summary>
-    /// <returns></returns>
-    private IEnumerator StartGameWithFade()
+    private IEnumerator StartGameWithFusuma()
     {
-        IsFading = true;
+        IsAnimating = true;
 
-        // フェードインさせる
-        yield return StartCoroutine(fadeController.FadeIn(
-            FadeController.FadeType.FadeInType, maxFadeTime)
-            );
+        // ふすまを閉じる関数を呼び出す
+        fusumaController.CloseFusuma();
+
+        // ふすまが閉じていない場合は待機
+        while (fusumaController.IsAnimating)
+        {
+            yield return null;
+        }
 
         // タイトル画面からゲーム画面へ遷移する
         SceneManager.LoadScene("Game");
     }
-
-    
 }

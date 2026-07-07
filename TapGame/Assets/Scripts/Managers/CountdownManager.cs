@@ -16,6 +16,10 @@ public class CountdownManager : MonoBehaviour
     // テキストUIを入れるための定義
     [SerializeField] private TextMeshProUGUI countdownText;
 
+    // ふすまを制御するスクリプトへの参照
+    [SerializeField] private FusumaController fusumaController;
+
+
     // 外部から状態を取得するため
     public bool IsCountingDown { get; private set; } = true;
 
@@ -28,7 +32,25 @@ public class CountdownManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CountdownRoutine());
+        StartCoroutine(StartGameRoutine());
+    }
+
+    private IEnumerator StartGameRoutine()
+    {
+        // ふすまを開く処理を開始
+        if (fusumaController != null)
+        {
+            fusumaController.OpenFusuma();
+
+            // ふすまがアニメーション中なら終わるまで待機する
+            while (fusumaController.IsAnimating)
+            {
+                yield return null;
+            }
+        }
+
+        // ふすまが開ききったらカウントダウンを開始
+        yield return StartCoroutine(CountdownRoutine());
     }
 
     /// <summary>
