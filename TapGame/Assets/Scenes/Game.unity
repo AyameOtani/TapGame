@@ -159,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33507300}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 465.72516, y: 1073.13, z: -11.72138}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 580855822}
   m_Layer: 5
   m_Name: Board
-  m_TagString: Untagged
+  m_TagString: tag_Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1248,6 +1248,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 619591455}
   - {fileID: 1676660274}
-  - {fileID: 33507302}
   - {fileID: 1616921669}
   - {fileID: 1820917168}
+  - {fileID: 33507302}
