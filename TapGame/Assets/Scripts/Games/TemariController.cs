@@ -26,8 +26,11 @@ public class TemariController : MonoBehaviour
     // スコア演出用の文字 (+1とか加算されたものを出すため)
     [SerializeField] private GameObject scorePopUpPrefab;
 
-    [SerializeField] private GameObject fxTemariDestroy;
+    // 手毬が消える時のパーティクル
+    [SerializeField] private GameObject fxTemariDestroyParticle;
 
+    // タップされたときに流したいSEと音量(0.0f から 1.0f)を入れる
+    [SerializeField] private SeManager.SeSetting tapSeSetting;
 
 
     // 拡大の目標値
@@ -97,6 +100,13 @@ public class TemariController : MonoBehaviour
         // 指定したスコアを加算して手毬を画面から削除してリソースを解放する
         ScoreManager.Instance.AddScore(point);
 
+        // インスペクターで設定したSEが存在していたらPlaySEを介して流す処理
+        if (tapSeSetting != null && tapSeSetting.clip != null)
+        {
+            SeManager.Instance.PlaySE(tapSeSetting.clip, tapSeSetting.volume);
+        }
+
+
         if (scorePopUpPrefab != null)
         {
             // Spawnerからキャンパスを聞く
@@ -116,9 +126,9 @@ public class TemariController : MonoBehaviour
         }
 
         // パーティクルが設定されていたら生成して初期化する
-        if (fxTemariDestroy != null)
+        if (fxTemariDestroyParticle != null)
         {
-            GameObject particle = Instantiate(fxTemariDestroy, transform.position, Quaternion.identity);
+            GameObject particle = Instantiate(fxTemariDestroyParticle, transform.position, Quaternion.identity);
 
             // アタッチしたスクリプトを取得してパーティクルのセットアップを依頼する
             if (particle.TryGetComponent<ParticleInitializer>(out var initializer))
