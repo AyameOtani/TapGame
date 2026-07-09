@@ -23,15 +23,24 @@ public class ResultManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        IsFading = true;
+        StartCoroutine(SetupResult());
     }
 
-    // Update is called once per frame
-    void Update()
+
+    /// <summary>
+    /// Gameからフェードアウトさせて自然に遷移させるため
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SetupResult()
     {
-        
-    }
+        yield return StartCoroutine(
+            fadeController.FadeIn(
+                FadeController.FadeType.FadeOutType,
+                maxFadeTime));
 
+        IsFading = false;
+    }
 
     /// <summary>
     ///  ゲーム開始ボタンが押された時の処理
@@ -42,7 +51,6 @@ public class ResultManager : MonoBehaviour
 
         StartCoroutine(StartTitleWithFade());
     }
-
 
 
     /// <summary>
@@ -61,5 +69,4 @@ public class ResultManager : MonoBehaviour
         // リザルト画面からタイトル画面へ遷移させるため
         SceneManager.LoadScene("Title");
     }
-
 }
