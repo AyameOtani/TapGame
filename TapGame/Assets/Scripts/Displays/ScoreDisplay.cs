@@ -14,12 +14,10 @@ public class ScoreDisplay : MonoBehaviour
     private string scoreNome;
 
 
-
     private void Start()
     {
         scoreNome = scoreText.text;
     }
-
 
     private void Update()
     {

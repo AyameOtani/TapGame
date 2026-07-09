@@ -30,6 +30,8 @@ public class TemariController : MonoBehaviour
 
 
 
+    // 拡大の目標値
+    private Vector2 targetScale;
 
     // 各色ごとのポイントの定数の設定
     private const int BluePoint = 2;
@@ -42,9 +44,6 @@ public class TemariController : MonoBehaviour
     private static readonly Color32 YellowColor = new Color32(246, 200, 100, 255);
 
 
-
-    // 拡大の目標値
-    private Vector2 targetScale;
 
     private void Start()
     {

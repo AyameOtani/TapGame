@@ -5,7 +5,6 @@
 /// </summary>
 public class ParticleInitializer : MonoBehaviour
 {
-
     /// <summary>
     /// エフェクトを初期化するための処理
     /// </summary>

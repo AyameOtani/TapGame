@@ -16,15 +16,14 @@ public class CountdownManager : MonoBehaviour
     // ふすまを制御するスクリプトへの参照
     [SerializeField] private FusumaController fusumaController;
 
-    [Header("ふすまが開くまでの待ち時間")]
     // ふすまが開くまでに待つカウント すぐ開かないように制御
+    [Header("ふすまが開くまでの待ち時間")]
     [SerializeField] private float waitBeforeOpen = 2.0f;
 
     private TextMeshProUGUI countdownText;
 
-    // 外部から状態を取得するため
+    // カウントダウン中かを外部からも取得出来るフラグにしら
     public bool IsCountingDown { get; private set; } = true;
-
     public static CountdownManager Instance { get; private set; }
 
     private void Awake()
@@ -36,15 +35,19 @@ public class CountdownManager : MonoBehaviour
         countdownText.enabled = false;
     }
 
+
     private void Start()
     {
         StartCoroutine(StartGameRoutine());
     }
 
+    /// <summary>
+    /// ふすま開閉とカウントダウンを制御するコルーチン処理
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator StartGameRoutine()
     {
         yield return new WaitForSeconds(waitBeforeOpen);
-
 
         // ふすまを開く処理を開始
         if (fusumaController != null)
@@ -60,6 +63,7 @@ public class CountdownManager : MonoBehaviour
         // ふすまが開ききったらカウントダウンを開始
         yield return StartCoroutine(CountdownRoutine());
     }
+
 
     /// <summary>
     /// カウントダウンの数値を表示し、終了後にゲーム開始フラグを立てる

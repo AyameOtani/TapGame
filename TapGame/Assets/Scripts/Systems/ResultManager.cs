@@ -3,13 +3,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-
 /// <summary>
 /// タイトルシーンに遷移させるためのクラス
 /// </summary>
 public class ResultManager : MonoBehaviour
 {
-
     // フェードするため
     [SerializeField] private FadeController fadeController; // インスペクターで設定
 
@@ -48,7 +46,6 @@ public class ResultManager : MonoBehaviour
     public void OnTapTitleButton()
     {
         if (IsFading) return;
-
         StartCoroutine(StartTitleWithFade());
     }
 

@@ -7,7 +7,6 @@
 public class TemariInputManager : MonoBehaviour
 {
     private Camera cam;
-
     void Start()
     {
         // 画面座標からワールド座標へ変換するため基準となるカメラをキャッシュする

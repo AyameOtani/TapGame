@@ -10,11 +10,10 @@ public class FusumaController : MonoBehaviour
     [SerializeField] private RectTransform rightFusuma;
     [SerializeField] private float duration = 0.5f; // アニメーション全体の所要時間
 
-    // 画面外への退避距離の倍率
-    private const float HideOffsetMultiplier = 1.5f;
 
     // アニメーション中かどうかを外部から確認できるようにする
     public bool IsAnimating { get; private set; } = false;
+
 
     /// <summary>
     /// ふすまを左右に動かして画面外へ退避させる ゲーム開始時の演出

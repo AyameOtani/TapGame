@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 /// <summary>
 /// フェードさせるためのクラス
 /// </summary>

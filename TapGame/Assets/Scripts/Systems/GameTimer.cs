@@ -23,6 +23,7 @@ public class GameTimer : MonoBehaviour
     public static float RemainingTime { get; private set; }
     public static float TotalTime { get; private set; } = 30.0f;
 
+
     // 元のテキストを保存する変数 インスペクターで変更したいため
     private string baseText;
 
@@ -40,9 +41,9 @@ public class GameTimer : MonoBehaviour
     private void Start()
     {
         RemainingTime = remainingTime;
-
         baseText = timerText.text;
     }
+
 
     private void Update()
     {
@@ -75,7 +76,6 @@ public class GameTimer : MonoBehaviour
                 }
             }
         }
-      
     }
 
     /// <summary>
@@ -92,9 +92,6 @@ public class GameTimer : MonoBehaviour
             FadeController.FadeType.FadeInType, maxFadeTime)
             );
 
-
-
         SceneManager.LoadScene("Result");
     }
-
 }

@@ -30,7 +30,6 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-
             // DontDestroyOnLoad...このオブジェクトは削除されずに次のシーンへ引き継がれる
             DontDestroyOnLoad(gameObject);
         }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 手毬をランダムに生成するクラス
