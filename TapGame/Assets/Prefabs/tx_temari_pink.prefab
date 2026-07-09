@@ -137,4 +137,6 @@ MonoBehaviour:
   scaleDuration: 0.2
   scorePopUpPrefab: {fileID: 9197685195664014431, guid: bcf35a2fe5ad0974199adf629777ff75, type: 3}
   fxTemariDestroyParticle: {fileID: 8837984396149531323, guid: 1d55f9d8e64d10345837c9eca1713587, type: 3}
-  tapSeClip: {fileID: 8300000, guid: 8e659b399c66c914fb42e3fc31fd2385, type: 3}
+  tapSeSetting:
+    clip: {fileID: 8300000, guid: 4f7fb329ffaceaf4b8db1d39dd0aa365, type: 3}
+    volume: 0.2

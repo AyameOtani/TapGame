@@ -14,9 +14,11 @@ public class ResultManager : MonoBehaviour
     // フェードにかける時間
     [SerializeField] private float maxFadeTime = 1.0f;
 
+    // 決定ボタンのSEを入れるため
+    [SerializeField] private SeManager.SeSetting titleButtonSe;
+
     //フェード中かどうかの判定
     private bool IsFading = false;
-
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,12 @@ public class ResultManager : MonoBehaviour
     public void OnTapTitleButton()
     {
         if (IsFading) return;
+
+        // ボタンがおされた時にSEを流す処理
+        if (titleButtonSe != null && titleButtonSe.clip != null)
+        {
+            SeManager.Instance.PlaySE(titleButtonSe.clip, titleButtonSe.volume);
+        }
         StartCoroutine(StartTitleWithFade());
     }
 

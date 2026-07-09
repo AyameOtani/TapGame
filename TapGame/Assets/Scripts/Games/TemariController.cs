@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 手毬の種類を定義する列挙型
@@ -166,9 +167,7 @@ public class TemariController : MonoBehaviour
 
             yield return null;
         }
-
         // 目標サイズにする
         transform.localScale = targetScale;
     }
-
 }
