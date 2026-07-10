@@ -48,19 +48,6 @@ public class TitleManager : MonoBehaviour
         StartCoroutine(SetupTitle());
     }
 
-    void Update()
-    {
-        // ESCキーが押されたらゲームを終了する
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
-        }
-    }
-
 
     // フェードアウト処理
     private IEnumerator SetupTitle()
