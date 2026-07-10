@@ -3,9 +3,9 @@
 /// <summary>
 /// SEの管理を一元管理にするため
 /// </summary>
-public class SeManager : MonoBehaviour
+public class SEManager : MonoBehaviour
 {
-    private static SeManager instance;
+    private static SEManager instance;
 
 
     /// <summary>
@@ -25,7 +25,7 @@ public class SeManager : MonoBehaviour
     /// <summary>
     /// 外部からアクセスするため ゲッターのようなもの
     /// </summary>
-    public static SeManager Instance
+    public static SEManager Instance
     {
         get { return instance; }
     }

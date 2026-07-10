@@ -20,6 +20,9 @@ public class CountdownManager : MonoBehaviour
     [Header("ふすまが開くまでの待ち時間")]
     [SerializeField] private float waitBeforeOpen = 2.0f;
 
+    // ふすまの開くSEを入れるため
+    [SerializeField] private SEManager.SeSetting fusumaOpenSe;
+
     private TextMeshProUGUI countdownText;
 
     // カウントダウン中かを外部からも取得出来るフラグにしら
@@ -52,6 +55,8 @@ public class CountdownManager : MonoBehaviour
         // ふすまを開く処理を開始
         if (fusumaController != null)
         {
+            PlayFusumaSE();
+
             fusumaController.OpenFusuma();
 
             // ふすまがアニメーション中なら終わるまで待機する
@@ -63,6 +68,18 @@ public class CountdownManager : MonoBehaviour
         // ふすまが開ききったらカウントダウンを開始
         yield return StartCoroutine(CountdownRoutine());
     }
+
+    /// <summary>
+    /// ふすまが開くSEを再生させるためにPlaySEを呼ぶ処理
+    /// </summary>
+    private void PlayFusumaSE()
+    {
+        if (fusumaOpenSe != null && fusumaOpenSe.clip != null)
+        {
+            SEManager.Instance.PlaySE(fusumaOpenSe.clip, fusumaOpenSe.volume);
+        }
+    }
+
 
 
     /// <summary>
