@@ -31,7 +31,7 @@ public class TemariController : MonoBehaviour
     [SerializeField] private GameObject fxTemariDestroyParticle;
 
     // タップされたときに流したいSEと音量(0.0f から 1.0f)を入れる
-    [SerializeField] private SeManager.SeSetting tapSeSetting;
+    [SerializeField] private SEManager.SeSetting tapSeSetting;
 
 
     // 拡大の目標値
@@ -104,7 +104,7 @@ public class TemariController : MonoBehaviour
         // インスペクターで設定したSEが存在していたらPlaySEを介して流す処理
         if (tapSeSetting != null && tapSeSetting.clip != null)
         {
-            SeManager.Instance.PlaySE(tapSeSetting.clip, tapSeSetting.volume);
+            SEManager.Instance.PlaySE(tapSeSetting.clip, tapSeSetting.volume);
         }
 
 

@@ -20,10 +20,10 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private AudioSource bgmAudioSource;
 
     // ふすまの開くSEを入れるため
-    [SerializeField] private SeManager.SeSetting fusumaOpenSe;
+    [SerializeField] private SEManager.SeSetting fusumaCloseSe;
 
     // 決定ボタンのSEを入れるため
-    [SerializeField] private SeManager.SeSetting startButtonSe;
+    [SerializeField] private SEManager.SeSetting startButtonSe;
 
     // ボリュームをフェードアウトさせた後にまた戻すため
     private float startVolume;
@@ -70,7 +70,7 @@ public class TitleManager : MonoBehaviour
         // ボタンがおされた時にSEを流す処理
         if (startButtonSe != null && startButtonSe.clip != null)
         {
-            SeManager.Instance.PlaySE(startButtonSe.clip, startButtonSe.volume);
+            SEManager.Instance.PlaySE(startButtonSe.clip, startButtonSe.volume);
         }
 
         // スコアをリセットし、ゲームの初期状態を確保する
@@ -109,9 +109,9 @@ public class TitleManager : MonoBehaviour
     /// </summary>
     private void PlayFusumaSE()
     {
-        if (fusumaOpenSe != null && fusumaOpenSe.clip != null)
+        if (fusumaCloseSe != null && fusumaCloseSe.clip != null)
         {
-            SeManager.Instance.PlaySE(fusumaOpenSe.clip, fusumaOpenSe.volume);
+            SEManager.Instance.PlaySE(fusumaCloseSe.clip, fusumaCloseSe.volume);
         }
     }
 

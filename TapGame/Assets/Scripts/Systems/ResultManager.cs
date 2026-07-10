@@ -15,7 +15,7 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private float maxFadeTime = 1.0f;
 
     // 決定ボタンのSEを入れるため
-    [SerializeField] private SeManager.SeSetting titleButtonSe;
+    [SerializeField] private SEManager.SeSetting titleButtonSe;
 
     //フェード中かどうかの判定
     private bool IsFading = false;
@@ -52,7 +52,7 @@ public class ResultManager : MonoBehaviour
         // ボタンがおされた時にSEを流す処理
         if (titleButtonSe != null && titleButtonSe.clip != null)
         {
-            SeManager.Instance.PlaySE(titleButtonSe.clip, titleButtonSe.volume);
+            SEManager.Instance.PlaySE(titleButtonSe.clip, titleButtonSe.volume);
         }
         StartCoroutine(StartTitleWithFade());
     }
