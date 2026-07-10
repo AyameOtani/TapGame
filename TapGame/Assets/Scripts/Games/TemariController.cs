@@ -33,6 +33,8 @@ public class TemariController : MonoBehaviour
     // タップされたときに流したいSEと音量(0.0f から 1.0f)を入れる
     [SerializeField] private SEManager.SeSetting tapSeSetting;
 
+    // 拡大アニメーションの挙動を定義するカーブ (0.0fから1.0fの範囲)
+    [SerializeField] private AnimationCurve scaleCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     // 拡大の目標値
     private Vector2 targetScale;
@@ -158,12 +160,13 @@ public class TemariController : MonoBehaviour
         {
             // 経過時間を加算
             elapsed += Time.deltaTime;
-
             // 0から1の割合を計算
             float t = Mathf.Clamp01(elapsed / duration);
 
-            // 目標サイズまで割合に応じて補間する
-            transform.localScale = Vector2.Lerp(Vector2.zero, targetScale, t);
+            // カーブの現在の時間における倍率を取得して目標サイズに掛ける
+            //一度大きくして、ぽよん という感じを出す
+            float curveValue = scaleCurve.Evaluate(t);
+            transform.localScale = targetScale * curveValue;
 
             yield return null;
         }

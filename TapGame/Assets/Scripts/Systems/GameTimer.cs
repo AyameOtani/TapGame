@@ -21,6 +21,7 @@ public class GameTimer : MonoBehaviour
     // タイマーのゲージを作成入れるため
     [SerializeField] private Slider timerSlider;
 
+
     // フェード中かを判定するフラグ
     public static bool IsFading { get; private set; } = false;
     public static float RemainingTime { get; private set; }
