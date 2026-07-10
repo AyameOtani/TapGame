@@ -23,6 +23,10 @@ public class CountdownManager : MonoBehaviour
     // ふすまの開くSEを入れるため
     [SerializeField] private SEManager.SeSetting fusumaOpenSe;
 
+    // 始めの琴のSEを入れるため
+    [SerializeField] private SEManager.SeSetting startKotoFadeOut;
+
+
     private TextMeshProUGUI countdownText;
 
     // カウントダウン中かを外部からも取得出来るフラグにしら
@@ -80,6 +84,17 @@ public class CountdownManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 始めの合図の時に琴のSEを呼ぶための処理
+    /// </summary>
+    private void PlayKotoSE()
+    {
+        if (startKotoFadeOut != null && startKotoFadeOut.clip != null)
+        {
+            SEManager.Instance.PlaySE(startKotoFadeOut.clip, startKotoFadeOut.volume);
+        }
+    }
+
 
 
     /// <summary>
@@ -99,6 +114,7 @@ public class CountdownManager : MonoBehaviour
         }
 
         countdownText.text = "始め！";
+        PlayKotoSE();
         yield return new WaitForSeconds(CountdownInterval);
 
         countdownText.gameObject.SetActive(false);

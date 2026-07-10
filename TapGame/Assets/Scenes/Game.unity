@@ -447,6 +447,9 @@ MonoBehaviour:
   fusumaOpenSe:
     clip: {fileID: 8300000, guid: b799a0b181e438141ab41135a3cf482a, type: 3}
     volume: 0.4
+  startKotoFadeOut:
+    clip: {fileID: 8300000, guid: 339d5c323a42a594487f8f32f6da5017, type: 3}
+    volume: 0.08
 --- !u!1 &580855820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,8 +1741,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 580855821}
-  - {fileID: 1392563140}
   - {fileID: 1928111381}
+  - {fileID: 1392563140}
   - {fileID: 1395435498}
   - {fileID: 823836047}
   - {fileID: 489615536}
