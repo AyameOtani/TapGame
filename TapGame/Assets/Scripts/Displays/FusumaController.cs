@@ -42,32 +42,31 @@ public class FusumaController : MonoBehaviour
         IsAnimating = true;
         float elapsed = 0.0f;
 
-        // 左のふすま   閉まっている時（X=0） 開いている時（X=-ふすまの幅）
-        float leftClosedX = 0;
-        float leftOpenX = -leftFusuma.rect.width;
+        // 今回は「画面の半分」を計算せず、ふすまの「幅(width)」だけで計算します
+        // アンカーが中央(0.5)なら、Pos Xを「ふすまの幅」分だけズラせば画面外に出ます
+        float moveDistance = leftFusuma.rect.width;
 
-        // 右のふすま   閉まっている時（X=0）  開いている時（X=ふすまの幅）
-        float rightClosedX = 0;
-        float rightOpenX = rightFusuma.rect.width;
+        // 左ふすま：閉＝X=0、開＝X=-移動距離
+        // 右ふすま：閉＝X=0、開＝X=移動距離
+        float leftTargetX = isOpen ? -moveDistance : 0;
+        float rightTargetX = isOpen ? moveDistance : 0;
 
-        // isOpenなら開ける    isOpenがfalseなら閉じる
-        Vector2 startLeft = isOpen ? new Vector2(leftClosedX, 0) : new Vector2(leftOpenX, 0);
-        Vector2 endLeft = isOpen ? new Vector2(leftOpenX, 0) : new Vector2(leftClosedX, 0);
+        Vector2 startLeft = leftFusuma.anchoredPosition;
+        Vector2 startRight = rightFusuma.anchoredPosition;
 
-        Vector2 startRight = isOpen ? new Vector2(rightClosedX, 0) : new Vector2(rightOpenX, 0);
-        Vector2 endRight = isOpen ? new Vector2(rightOpenX, 0) : new Vector2(rightClosedX, 0);
+        Vector2 endLeft = new Vector2(leftTargetX, 0);
+        Vector2 endRight = new Vector2(rightTargetX, 0);
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
+            float t = Mathf.SmoothStep(0, 1, Mathf.Clamp01(elapsed / duration));
 
             leftFusuma.anchoredPosition = Vector2.Lerp(startLeft, endLeft, t);
             rightFusuma.anchoredPosition = Vector2.Lerp(startRight, endRight, t);
 
             yield return null;
         }
-
         IsAnimating = false;
     }
 }
