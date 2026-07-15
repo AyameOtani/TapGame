@@ -42,8 +42,6 @@ public class FusumaController : MonoBehaviour
         IsAnimating = true;
         float elapsed = 0.0f;
 
-        // 今回は「画面の半分」を計算せず、ふすまの「幅(width)」だけで計算します
-        // アンカーが中央(0.5)なら、Pos Xを「ふすまの幅」分だけズラせば画面外に出ます
         float moveDistance = leftFusuma.rect.width;
 
         // 左ふすま：閉＝X=0、開＝X=-移動距離
