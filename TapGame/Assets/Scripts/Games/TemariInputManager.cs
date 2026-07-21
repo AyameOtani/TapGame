@@ -2,7 +2,7 @@
 
 /// <summary>
 /// 手毬のタップ操作を検知し、対応するコントローラーへ通知するクラス
-/// 入力判定とゲームロジックの分離を目的としています
+/// 入力判定とゲームロジックの分離を目的としている
 /// </summary>
 public class TemariInputManager : MonoBehaviour
 {
